@@ -22,7 +22,6 @@ module.exports = function(grunt) {
 		qunit: {
 			files: [ 'test/*.html' ]
 		},
-
 		uglify: {
 			options: {
 				banner: '<%= meta.banner %>\n'

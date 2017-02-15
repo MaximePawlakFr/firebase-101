@@ -8,6 +8,7 @@
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/app.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -22,10 +23,551 @@
 		</script>
 	</head>
 	<body>
+
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+				<section data-markdown>
+    			<script type="text/template">
+					 # Firebase 101
+
+					 todo
+					 * Firebase Cloud Messaging : screenshots
+
+					 <aside class="notes">
+					 </aside>
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+						# $whoami
+
+						![](./img/maxime.png)
+
+						[@Maxime_Pawlak](https://twitter.com/Maxime_Pawlak)
+
+					</script>
+				</section>
+
+				<section data-markdown data-background-image="http://i.giphy.com/uUnkhtYaR41Dq.gif"
+					data-background-size="100%">
+					<script type="text/template">
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Goals
+
+						* Embrace Firebase
+						* Discover a scope of possibilities
+						* Does Firebase fit my business ?
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Once upon a time
+						&nbsp;
+						* Apr. 2012 : git init
+						* Firebase Realtime Database + Firebase Hosting + and Firebase Authentication
+						* Oct. 2014 : git checkout google && git merge firebase
+						* May 2016 : git push GoogleIO
+						* Jan. 2017 : git merge Fabric
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+						# Firebase
+						> Develop, Grow, Earn - Mobile App Success Made Simple‎
+					</script>
+				</section>
+
+				<section data-markdown>
+    			<script type="text/template">
+					 ![](./img/firebase_and_co.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Analytics
+
+						*later ...*
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						<!-- ![](./img/earn.png) -->
+
+						![](https://lh3.googleusercontent.com/you5Qm6B9GhkBvQ-A25p2p3iDsRCzwbqupJ-H4wJWAnkl2O0jOgar4zhY31e0RUAw40P47jkfDg24T3KHDRFSFFRGUXn6a8=s1600)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/develop.png)
+					</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							# git init
+							[![](./img/play.png)](https://console.firebase.google.com/?pli=1)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/console_overview.png)
+
+							<aside class="notes">
+								* SDK iOS + Android + Js (Sdk Web, Sdk Node)
+								* C++ / Unity
+							</aside>
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/console_new_web_app.png)
+						</script>
+					</section>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+						# Realtime Database
+						- Cloud-hosted NoSQL database
+						- Synchronization & conflict resolution
+						- Access directly from your app
+					</script>
+				</section>
+
+				<section data-markdown>
+    			<script type="text/template">
+					 ![](./img/realtimedatabase.gif)
+					</script>
+				</section>
+
+				<section>
+				<section data-markdown>
+					<script type="text/template">
+						[![](./img/play.png)](https://console.firebase.google.com/?pli=1)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						```
+						// Get a reference to the database service
+						var db = firebase.database();
+
+						db.ref('/thematicSessions/2017-02-firebase').set({
+							ts: Date.now(),
+							email: "mpawlak@simplon.co",
+							name: "2017-02-firebase"
+						})
+						```
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/console_db_thematicSessions.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						```
+						db.ref('/thematicSessions/').push({
+							ts: Date.now(),
+							email: "iot@simplon.co",
+							name: "2017-02-firebase"
+						})
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/console_db_02.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						```
+						/*
+						* value: Read and listen for changes
+						* to the entire contents of a path.
+						*/
+
+						firebase.database()
+							.ref('/thematicSessions/2017-02-firebase')
+							.on('value', function(snapshot) {
+									// ...
+						});
+
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						```
+						firebase.database().ref('/thematicSessions')
+							.on('child_added', function(snapshot) {
+								// ...
+						});
+
+						firebase.database().ref('/thematicSessions')
+							.on('child_changed', function(snapshot) {
+								// ...
+						});
+
+						firebase.database().ref('/thematicSessions')
+							.on('child_removed', function(snapshot) {
+								// ...
+						});
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Security Rules
+						![](./img/console_rules.png)
+					</script>
+				</section>
+				</section>
+
+
+
+				<section data-markdown>
+					<script type="text/template">
+						# Authentication
+
+						* Email & password
+						* Google, Facebook, Twitter, and GitHub sign-in
+						* Existing auth systems
+					</script>
+				</section>
+
+				<section>
+				<section data-markdown>
+					<script type="text/template">
+						[![](./img/play.png)](https://console.firebase.google.com/?pli=1)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						```
+						firebase.auth()
+						.createUserWithEmailAndPassword(email, password)
+						.catch(function(error) {
+							// Handle Errors here.
+							// ...
+						});
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						```
+						firebase.auth()
+						.signInWithEmailAndPassword(email, password)
+						.catch(function(error) {
+							// Handle Errors here.
+							// ...
+						});
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/console_auth_users.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						```
+						firebase.auth().onAuthStateChanged(function(user) {
+							if (user) {
+								// User is signed in.
+							} else {
+								// No user is signed in.
+							}
+						});
+						```
+					</script>
+				</section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Hosting
+
+						* Serve static assets
+						* SSL by default
+						* Custom domains
+					</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/console_hosting_setup.png)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/console_hosting_setup02.png)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/firebase_cli.png)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/console_hosting_rollback.png)
+						</script>
+					</section>
+
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Storage
+
+						* Easy file storage
+						* Handles poor connectivity
+						* Backed by & accessible from Google Cloud Storage
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						```
+						// Create a reference to 'mountains.jpg'
+						var mountainsRef = firebase.storage().ref('mountains.jpg');
+
+						var file = ... // use the Blob or File API
+						ref.put(file).then(function(snapshot) {
+							console.log('Uploaded a blob or file!');
+						});
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/console_storage.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Firebase Cloud Messaging
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Remote Config
+
+						* Server-side variables
+						* Modify without deploying
+						* Integrated with Analytics
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/remote_config.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/remote_config_conditions.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Test Lab for Android
+
+						* Test on the most popular devices before you ship
+						* Reports & screenshots
+						* Robo & custom tests
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/lab_test.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Crash Reporting
+
+						* See crashes & impact
+						* Version & OS drill-down
+						* Integrated with Analytics
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						 ![](./img/crash_reporting.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/develop.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/grow.png)
+
+						<aside class="notes">
+							<ul>
+								<li>Dynamic Links :
+									<ul>
+										<li>Customize different user experiences via a single URL</li>
+										<li>Cross Platforms</li>
+										<li>Analytics insights</li>
+									</ul>
+								</li>
+								<li>App Indexing :
+									<ul>
+										<li>Index app content</li>
+										<li>Improve search ranking</li>
+									</ul>
+								</li>
+							</ul>
+						</aside>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![](./img/earn.png)
+					</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/analytics.png)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							# Analytics
+
+							* Designed for apps
+							* Event and user centric
+							* Connects across Firebase
+							* Free & unlimited
+
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/analytics_overview.png)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/analytics_02.png)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/analytics_funnel.png)
+						</script>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# $
+						![](./img/pricing.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						<iframe width="640" height="360" src="https://www.youtube.com/embed/k1D0_wFlXgo" frameborder="0" allowfullscreen></iframe>
+					</script>
+				</section>
+
+				<section data-markdown>
+    			<script type="text/template">
+					 ![](./img/firebase_and_co.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						 + | -
+						 -- | --
+						 Start (really) fast | Flat Json Model
+						 MVP at a glance | *Don't be evil*
+						 Security Rules | *Don't be evil*
+						 Doc & Resources | *Don't be evil*
+						 Pricing | *Don't be evil*
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Thank you
+						![](http://i.giphy.com/6PopYBwOlKS8o.gif)
+
+						Any questions ?
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						Credits to [Firebase Content Bundle](https://docs.google.com/presentation/d/14GavodKVz3YkHI_nvQeB1uXYJrT4axWyyIziQZhLeaU/edit#slide=id.g14290f277c_2_119)
+					</script>
+				</section>
+
 			</div>
 		</div>
 
@@ -36,7 +578,8 @@
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
-
+				controls: false,
+ 				slideNumber: true,
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
