@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Firebase 101 | Maxime Pawlak</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -31,8 +31,13 @@
     			<script type="text/template">
 					 # Firebase 101
 
-					 todo
-					 * Firebase Cloud Messaging : screenshots
+					 &nbsp;
+
+					 &nbsp;
+
+					 &nbsp;
+
+					 *16-02-2017 - Dev Thematic Session - @IOTValley*
 
 					 <aside class="notes">
 					 </aside>
@@ -44,7 +49,18 @@
 					<script type="text/template">
 						# $whoami
 
-						![](./img/maxime.png)
+						<!-- ![](./img/maxime.png) -->
+						\- Naratte Inc. - Minute Papillote -
+
+						\- New Dartagnan - Support Me Up -
+
+						\- Strip.io - Poc Poc Poc -
+
+						\- Simplon.co - CityCart.paris -
+
+						---
+
+						\- Pitch Me Up - DevFestToulouse - GDGToulouse -
 
 						[@Maxime_Pawlak](https://twitter.com/Maxime_Pawlak)
 
@@ -84,7 +100,9 @@
 				<section data-markdown>
 					<script type="text/template">
 						# Firebase
-						> Develop, Grow, Earn - Mobile App Success Made Simple‎
+						> Develop, Grow, Earn
+
+						> Mobile App Success Made Simple‎
 					</script>
 				</section>
 
@@ -159,97 +177,97 @@
 				</section>
 
 				<section>
-				<section data-markdown>
-					<script type="text/template">
-						[![](./img/play.png)](https://console.firebase.google.com/?pli=1)
-					</script>
-				</section>
+					<section data-markdown>
+						<script type="text/template">
+							[![](./img/play.png)](https://console.firebase.google.com/?pli=1)
+						</script>
+					</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						```
-						// Get a reference to the database service
-						var db = firebase.database();
+					<section data-markdown>
+						<script type="text/template">
+							```
+							// Get a reference to the database service
+							var db = firebase.database();
 
-						db.ref('/thematicSessions/2017-02-firebase').set({
-							ts: Date.now(),
-							email: "mpawlak@simplon.co",
-							name: "2017-02-firebase"
-						})
-						```
-					</script>
-				</section>
+							db.ref('/thematicSessions/2017-02-firebase').set({
+								ts: Date.now(),
+								email: "mpawlak@simplon.co",
+								name: "2017-02-firebase"
+							})
+							```
+						</script>
+					</section>
 
 
-				<section data-markdown>
-					<script type="text/template">
-						![](./img/console_db_thematicSessions.png)
-					</script>
-				</section>
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/console_db_thematicSessions.png)
+						</script>
+					</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						```
-						db.ref('/thematicSessions/').push({
-							ts: Date.now(),
-							email: "iot@simplon.co",
-							name: "2017-02-firebase"
-						})
-						```
-					</script>
-				</section>
+					<section data-markdown>
+						<script type="text/template">
+							```
+							db.ref('/thematicSessions/').push({
+								ts: Date.now(),
+								email: "iot@simplon.co",
+								name: "2017-02-firebase"
+							})
+							```
+						</script>
+					</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						![](./img/console_db_02.png)
-					</script>
-				</section>
+					<section data-markdown>
+						<script type="text/template">
+							![](./img/console_db_02.png)
+						</script>
+					</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						```
-						/*
-						* value: Read and listen for changes
-						* to the entire contents of a path.
-						*/
+					<section data-markdown>
+						<script type="text/template">
+							```
+							/*
+							* value: Read and listen for changes
+							* to the entire contents of a path.
+							*/
 
-						firebase.database()
-							.ref('/thematicSessions/2017-02-firebase')
-							.on('value', function(snapshot) {
+							firebase.database()
+								.ref('/thematicSessions/2017-02-firebase')
+								.on('value', function(snapshot) {
+										// ...
+							});
+
+							```
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							```
+							firebase.database().ref('/thematicSessions')
+								.on('child_added', function(snapshot) {
 									// ...
-						});
+							});
 
-						```
-					</script>
-				</section>
+							firebase.database().ref('/thematicSessions')
+								.on('child_changed', function(snapshot) {
+									// ...
+							});
 
-				<section data-markdown>
-					<script type="text/template">
-						```
-						firebase.database().ref('/thematicSessions')
-							.on('child_added', function(snapshot) {
-								// ...
-						});
+							firebase.database().ref('/thematicSessions')
+								.on('child_removed', function(snapshot) {
+									// ...
+							});
+							```
+						</script>
+					</section>
 
-						firebase.database().ref('/thematicSessions')
-							.on('child_changed', function(snapshot) {
-								// ...
-						});
-
-						firebase.database().ref('/thematicSessions')
-							.on('child_removed', function(snapshot) {
-								// ...
-						});
-						```
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						# Security Rules
-						![](./img/console_rules.png)
-					</script>
-				</section>
+					<section data-markdown>
+						<script type="text/template">
+							# Security Rules
+							![](./img/console_rules.png)
+						</script>
+					</section>
 				</section>
 
 
@@ -405,7 +423,7 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						![](./img/console_notif_analytics.png) 
+						![](./img/console_notif_analytics.png)
 					</script>
 				</section>
 
